@@ -7,9 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by stefanlederer on 19.05.17.
@@ -20,6 +18,8 @@ public class Application {
 
     int mainFrameWidth = 600;
     int mainFrameHeight = 400;
+
+    String[][] selectedFiles;
 
     private Application() {
 
@@ -51,6 +51,7 @@ public class Application {
 
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     System.out.print(filechooser.getSelectedFile().getName());
+                    selectedFiles = FileAction.getSelectedFiles(filechooser.getSelectedFile().getName(), filechooser.getSelectedFile().getAbsolutePath());
                 }
             }
         });
