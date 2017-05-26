@@ -28,7 +28,7 @@ public class Application {
         mainFrame.setPreferredSize(new Dimension(mainFrameWidth, mainFrameHeight));
         mainFrame.setLocation((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 - mainFrameWidth / 2), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2 - mainFrameHeight / 2));
 
-        JPanel menuPanel = new JPanel();
+        final JPanel menuPanel = new JPanel();
         menuPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         mainFrame.add(menuPanel, BorderLayout.PAGE_START);
 
@@ -50,8 +50,11 @@ public class Application {
                 int returnValue = filechooser.showDialog(null, "Auswählen");
 
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    System.out.print(filechooser.getSelectedFile().getName());
+//                    System.out.print(filechooser.getSelectedFile().getName());
                     selectedFiles = FileAction.getSelectedFiles(filechooser.getSelectedFile().getName(), filechooser.getSelectedFile().getAbsolutePath());
+                }
+                for (int a = 0; a < selectedFiles.length; a++) {
+                    System.out.println(selectedFiles[a][0]);
                 }
             }
         });
