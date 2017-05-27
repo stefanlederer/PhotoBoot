@@ -1,8 +1,5 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,6 +12,7 @@ import java.io.IOException;
 public class Application {
 
     JFrame mainFrame;
+    List selectedFileList;
 
     int mainFrameWidth = 600;
     int mainFrameHeight = 400;
@@ -50,12 +48,24 @@ public class Application {
                 int returnValue = filechooser.showDialog(null, "Auswählen");
 
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-//                    System.out.print(filechooser.getSelectedFile().getName());
                     selectedFiles = FileAction.getSelectedFiles(filechooser.getSelectedFile().getName(), filechooser.getSelectedFile().getAbsolutePath());
                 }
-                for (int a = 0; a < selectedFiles.length; a++) {
-                    System.out.println(selectedFiles[a][0]);
+
+                if (selectedFileList != null) {
+                    selectedFileList.removeAll();
+                } else {
+                    selectedFileList = new List(selectedFiles.length, false);
                 }
+
+                for (int a = 0; a < selectedFiles.length; a++) {
+                    selectedFileList.add(selectedFiles[a][0]);
+                }
+                selectedFileList.repaint();
+                mainFrame.add(selectedFileList);
+
+                mainFrame.invalidate();
+                mainFrame.validate();
+                mainFrame.repaint();
             }
         });
 
