@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
@@ -39,10 +40,22 @@ public class FileAction {
             BufferedImage img = null;
             try {
                 img = ImageIO.read(new File(file[1]));
+
+                int height = img.getHeight();
+                int width = img.getWidth();
+                String [][] pixels = new String [width][height];
+
+                for (int w = 0; w < width; w++) {
+                    for (int h = 0; h < height; h++) {
+                        pixels[w][h] = Integer.toHexString(img.getRGB(w, h)).substring(0,6);
+                        System.out.print(pixels[w][h] + " ");
+                    }
+                    System.out.println();
+                }
+
             } catch (IOException e) {
                 System.out.println("Cannot read File " + file[0]);
             }
-            System.out.println(img);
         }
     }
 
