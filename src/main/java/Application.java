@@ -74,7 +74,11 @@ public class Application {
 
         compressButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("compress Button Clicked");
+                if (selectedFiles.length == 0) {
+                    System.out.println("No files selected");
+                } else {
+                    FileAction.loadSelectedFiles(selectedFiles);
+                }
             }
         });
 

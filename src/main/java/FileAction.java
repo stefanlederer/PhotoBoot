@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by stefanlederer on 21.05.17.
@@ -27,6 +32,18 @@ public class FileAction {
         }
 
         return selectedFiles;
+    }
+
+    public static void loadSelectedFiles(String[][] files) {
+        for (String[] file : files) {
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(new File(file[1]));
+            } catch (IOException e) {
+                System.out.println("Cannot read File " + file[0]);
+            }
+            System.out.println(img);
+        }
     }
 
 }
