@@ -77,7 +77,12 @@ public class Application {
                 if (selectedFiles.length == 0) {
                     System.out.println("No files selected");
                 } else {
-                    FileAction.loadSelectedFiles(selectedFiles);
+                    for (String[] selectedFile : selectedFiles) {
+                        String[][] pixels = FileAction.loadSelectedFile(selectedFile);
+                        if(pixels != null) {
+                            Analysis.analysePixels();
+                        }
+                    }
                 }
             }
         });

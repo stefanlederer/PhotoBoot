@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class FileAction {
 
-    private static String[][] selectedFilesRaw = new String [10][2];
+    private static String[][] selectedFilesRaw = new String[10][2];
     private static int i = 0;
 
     static String[][] getSelectedFiles(String name, String path) {
@@ -23,7 +23,7 @@ public class FileAction {
         int a = 0;
         do {
             a++;
-        } while(selectedFilesRaw[a][0] != null);
+        } while (selectedFilesRaw[a][0] != null);
 
         String[][] selectedFiles = new String[a][2];
 
@@ -35,28 +35,26 @@ public class FileAction {
         return selectedFiles;
     }
 
-    public static void loadSelectedFiles(String[][] files) {
-        for (String[] file : files) {
-            BufferedImage img = null;
-            try {
-                img = ImageIO.read(new File(file[1]));
+    public static String[][] loadSelectedFile(String[] file) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(file[1]));
 
-                int height = img.getHeight();
-                int width = img.getWidth();
-                String [][] pixels = new String [width][height];
+            int height = img.getHeight();
+            int width = img.getWidth();
+            String[][] pixels = new String[width][height];
 
-                for (int w = 0; w < width; w++) {
-                    for (int h = 0; h < height; h++) {
-                        pixels[w][h] = Integer.toHexString(img.getRGB(w, h)).substring(0,6);
-                        System.out.print(pixels[w][h] + " ");
-                    }
-                    System.out.println();
+            for (int w = 0; w < width; w++) {
+                for (int h = 0; h < height; h++) {
+                    pixels[w][h] = Integer.toHexString(img.getRGB(w, h)).substring(0, 6);
                 }
-
-            } catch (IOException e) {
-                System.out.println("Cannot read File " + file[0]);
             }
+            return pixels;
+
+        } catch (IOException e) {
+            System.out.println("Cannot read File " + file[0]);
         }
+        return null;
     }
 
 }
