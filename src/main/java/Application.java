@@ -80,7 +80,7 @@ public class Application {
                     for (String[] selectedFile : selectedFiles) {
                         String[][] pixels = FileAction.loadSelectedFile(selectedFile);
                         if(pixels != null) {
-                            Analysis.analysePixels();
+                            Analysis.analysePixels(pixels);
                         }
                     }
                 }
