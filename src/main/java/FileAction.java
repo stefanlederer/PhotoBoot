@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by stefanlederer on 21.05.17.
@@ -55,6 +56,10 @@ public class FileAction {
             System.out.println("Cannot read File " + file[0]);
         }
         return null;
+    }
+
+    public static void createCompressedFile(ArrayList<ArrayList<String>> compressedPixels) {
+        System.out.println(compressedPixels.get(0));
     }
 
 }

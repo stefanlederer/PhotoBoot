@@ -6,7 +6,8 @@ import java.util.ArrayList;
  */
 public class Analysis {
 
-    public static void analysePixels(String[][] pixels) {
+    public static ArrayList<ArrayList<String>> analysePixels(String[][] pixels) {
+        ArrayList<ArrayList<String>> analysedPixels = new ArrayList<ArrayList<String>>();
         ArrayList<String> headerSegment = new ArrayList<String>();
         ArrayList<String> compressedPixel = new ArrayList<String>();
 
@@ -37,12 +38,11 @@ public class Analysis {
                         split = "";
                     }
                 compressedPixel.add(split + counter + "-" + deviation);
-
             }
         }
-        System.out.println(headerSegment);
-        System.out.println(compressedPixel.size());
-        System.out.println(compressedPixel.get(0));
+        analysedPixels.add(headerSegment);
+        analysedPixels.add(compressedPixel);
 
+        return analysedPixels;
     }
 }

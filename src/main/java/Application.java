@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by stefanlederer on 19.05.17.
@@ -80,7 +81,8 @@ public class Application {
                     for (String[] selectedFile : selectedFiles) {
                         String[][] pixels = FileAction.loadSelectedFile(selectedFile);
                         if(pixels != null) {
-                            Analysis.analysePixels(pixels);
+                            ArrayList<ArrayList<String>> analysedPixels = Analysis.analysePixels(pixels);
+                            FileAction.createCompressedFile(analysedPixels);
                         }
                     }
                 }
