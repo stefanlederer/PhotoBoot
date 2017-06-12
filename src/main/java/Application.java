@@ -82,7 +82,7 @@ public class Application {
                         String[][] pixels = FileAction.loadSelectedFile(selectedFile);
                         if(pixels != null) {
                             ArrayList<ArrayList<String>> analysedPixels = Analysis.analysePixels(pixels);
-                            FileAction.createCompressedFile(analysedPixels);
+                            FileAction.createCompressedFile(analysedPixels, selectedFile[0]);
                         }
                     }
                 }

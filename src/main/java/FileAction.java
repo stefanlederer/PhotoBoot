@@ -2,7 +2,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -58,8 +60,24 @@ public class FileAction {
         return null;
     }
 
-    public static void createCompressedFile(ArrayList<ArrayList<String>> compressedPixels) {
+    public static void createCompressedFile(ArrayList<ArrayList<String>> compressedPixels, String filename) {
         System.out.println(compressedPixels.get(0));
+
+        try {
+            FileWriter compressedFile = new FileWriter("/home/stefanlederer/Dokumente/" + filename + ".pb");
+            BufferedWriter filewriter = new BufferedWriter(compressedFile);
+
+            for (ArrayList<String> fileareas : compressedPixels) {
+                for (String pixelsCode : fileareas) {
+                    filewriter.write(pixelsCode + ",");
+                }
+                filewriter.write(";");
+            }
+            filewriter.close();
+
+        } catch (Exception e) {
+            System.out.println("Cannot create file" + e);
+        }
     }
 
 }
