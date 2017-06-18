@@ -1,11 +1,12 @@
+import sun.nio.cs.UTF_32;
+import sun.text.normalizer.UTF16;
+
 import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -61,18 +62,20 @@ public class FileAction {
     }
 
     public static void createCompressedFile(ArrayList<ArrayList<String>> compressedPixels, String filename) {
-        System.out.println(compressedPixels.get(0));
 
+        byte[] enjambement = DatatypeConverter.parseBase64Binary(";");
         try {
-            FileWriter compressedFile = new FileWriter("/home/stefanlederer/Dokumente/" + filename + ".pb");
-            BufferedWriter filewriter = new BufferedWriter(compressedFile);
+            File compressedFile = new File("/home/stefanlederer/Dokumente/" + filename + ".bin");
+            FileOutputStream filewriter = new FileOutputStream(compressedFile, true);
 
             for (ArrayList<String> fileareas : compressedPixels) {
                 for (String pixelsCode : fileareas) {
-                    filewriter.write(pixelsCode + ",");
+                    byte[] b = DatatypeConverter.parseBase64Binary(pixelsCode + ",");
+                    filewriter.write(b);
                 }
-                filewriter.write(";");
+                filewriter.write(enjambement);
             }
+            filewriter.flush();
             filewriter.close();
 
         } catch (Exception e) {
