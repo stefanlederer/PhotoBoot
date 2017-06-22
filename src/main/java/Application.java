@@ -14,6 +14,7 @@ public class Application {
 
     JFrame mainFrame;
     List selectedFileList;
+    JButton compressButton;
 
     int mainFrameWidth = 600;
     int mainFrameHeight = 400;
@@ -50,6 +51,13 @@ public class Application {
 
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     selectedFiles = FileAction.getSelectedFiles(filechooser.getSelectedFile().getName(), filechooser.getSelectedFile().getAbsolutePath());
+
+                    String[] filetype = selectedFiles[selectedFiles.length - 1][0].split("\\.");
+                    if (filetype[filetype.length - 1].equals("bin")) {
+                        compressButton.setText("Dekomprimieren");
+                    } else {
+                        compressButton.setText("Komprimieren");
+                    }
                 }
 
                 if (selectedFileList != null) {
@@ -61,6 +69,7 @@ public class Application {
                 for (int a = 0; a < selectedFiles.length; a++) {
                     selectedFileList.add(selectedFiles[a][0]);
                 }
+
                 selectedFileList.repaint();
                 mainFrame.add(selectedFileList);
 
@@ -70,7 +79,7 @@ public class Application {
             }
         });
 
-        JButton compressButton = new JButton("Komprimieren");
+        compressButton = new JButton("Komprimieren");
         menuPanel.add(compressButton);
 
         compressButton.addMouseListener(new MouseAdapter() {
@@ -80,7 +89,7 @@ public class Application {
                 } else {
                     for (String[] selectedFile : selectedFiles) {
                         String[][] pixels = FileAction.loadSelectedFile(selectedFile);
-                        if(pixels != null) {
+                        if (pixels != null) {
                             ArrayList<ArrayList<String>> analysedPixels = Analysis.analysePixels(pixels);
                             FileAction.createCompressedFile(analysedPixels, selectedFile[0]);
                         }
