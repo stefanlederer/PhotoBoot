@@ -83,8 +83,25 @@ public class FileAction {
         }
     }
 
-    public static void loadCompressedFile(String[] file) {
+    public static String loadCompressedFile(String[] file) {
 
+        try {
+            String data = null;
+            String currentLine;
+
+            BufferedReader br = new BufferedReader(new FileReader(file[1]));
+
+            while ((currentLine = br.readLine()) != null) {
+                data = data + currentLine;
+                System.out.println(currentLine);
+            }
+
+            return data;
+
+        } catch (Exception e) {
+            System.out.println("Cannot read File " + file[0]);
+        }
+        return null;
     }
 
 }

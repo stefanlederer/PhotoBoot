@@ -92,7 +92,7 @@ public class Application {
                         String[] filetype = selectedFile[1].split("\\.");
                         if (filetype[filetype.length - 1].equals("bin")) {
 
-                            FileAction.loadCompressedFile(selectedFile);
+                            String compressedData = FileAction.loadCompressedFile(selectedFile);
 
                         } else {
                             String[][] pixels = FileAction.loadSelectedFile(selectedFile);
