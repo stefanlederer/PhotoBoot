@@ -91,8 +91,11 @@ public class Application {
 
                         String[] filetype = selectedFile[1].split("\\.");
                         if (filetype[filetype.length - 1].equals("bin")) {
-
                             String compressedData = FileAction.loadCompressedFile(selectedFile);
+
+                            if(compressedData != null) {
+                                Analysis.decompressData(compressedData);
+                            }
 
                         } else {
                             String[][] pixels = FileAction.loadSelectedFile(selectedFile);

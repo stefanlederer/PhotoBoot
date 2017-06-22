@@ -45,4 +45,8 @@ public class Analysis {
 
         return analysedPixels;
     }
+
+    public static void decompressData(String compressedData) {
+
+    }
 }
