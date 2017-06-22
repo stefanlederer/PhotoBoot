@@ -88,11 +88,21 @@ public class Application {
                     System.out.println("No files selected");
                 } else {
                     for (String[] selectedFile : selectedFiles) {
-                        String[][] pixels = FileAction.loadSelectedFile(selectedFile);
-                        if (pixels != null) {
-                            ArrayList<ArrayList<String>> analysedPixels = Analysis.analysePixels(pixels);
-                            FileAction.createCompressedFile(analysedPixels, selectedFile[0]);
+
+                        String[] filetype = selectedFile[1].split("\\.");
+                        if (filetype[filetype.length - 1].equals("bin")) {
+
+                            FileAction.loadCompressedFile(selectedFile);
+
+                        } else {
+                            String[][] pixels = FileAction.loadSelectedFile(selectedFile);
+
+                            if (pixels != null) {
+                                ArrayList<ArrayList<String>> analysedPixels = Analysis.analysePixels(pixels);
+                                FileAction.createCompressedFile(analysedPixels, selectedFile[0]);
+                            }
                         }
+
                     }
                 }
             }

@@ -83,4 +83,8 @@ public class FileAction {
         }
     }
 
+    public static void loadCompressedFile(String[] file) {
+
+    }
+
 }
