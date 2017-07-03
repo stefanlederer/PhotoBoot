@@ -1,11 +1,7 @@
-import sun.nio.cs.UTF_32;
-import sun.text.normalizer.UTF16;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -86,17 +82,20 @@ public class FileAction {
     public static String loadCompressedFile(String[] file) {
 
         try {
-            String data = null;
-            String currentLine;
 
-            BufferedReader br = new BufferedReader(new FileReader(file[1]));
+            File f = new File(file[1]);
+            byte[] bytes = new byte[(int)f.length()];
+            InputStream is = new FileInputStream(f);
 
-            while ((currentLine = br.readLine()) != null) {
-                data = data + currentLine;
-                System.out.println(currentLine);
+            int offset = 0;
+            int numRead;
+            while (offset < bytes.length
+                    && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
+                offset += numRead;
             }
+            is.close();
 
-            return data;
+            return DatatypeConverter.printBase64Binary(bytes);
 
         } catch (Exception e) {
             System.out.println("Cannot read File " + file[0]);
