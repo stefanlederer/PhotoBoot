@@ -33,11 +33,11 @@ public class Analysis {
                 }
                 String split;
                     if (width == 0) {
-                        split = ";";
+                        split = "h";
                     } else {
                         split = "";
                     }
-                compressedPixel.add(split + counter + "-" + deviation);
+                compressedPixel.add(split + counter + "g" + deviation);
             }
         }
         analysedPixels.add(headerSegment);

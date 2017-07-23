@@ -59,14 +59,14 @@ public class FileAction {
 
     public static void createCompressedFile(ArrayList<ArrayList<String>> compressedPixels, String filename) {
 
-        byte[] enjambement = DatatypeConverter.parseBase64Binary(";");
+        byte[] enjambement = DatatypeConverter.parseBase64Binary("h");
         try {
             File compressedFile = new File("/home/stefanlederer/Dokumente/" + filename + ".bin");
             FileOutputStream filewriter = new FileOutputStream(compressedFile, true);
 
             for (ArrayList<String> fileareas : compressedPixels) {
                 for (String pixelsCode : fileareas) {
-                    byte[] b = DatatypeConverter.parseBase64Binary(pixelsCode + ",");
+                    byte[] b = DatatypeConverter.parseBase64Binary(pixelsCode + "g");
                     filewriter.write(b);
                 }
                 filewriter.write(enjambement);
