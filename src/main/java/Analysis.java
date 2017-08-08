@@ -50,5 +50,13 @@ public class Analysis {
         String headerSegment = compressedData.split("gh")[0];
         String[] headerSegmentPixels = headerSegment.split("g");
 
+        String[] lineSegment = compressedData.split("gh")[1].split("h");
+
+        for (int i = 0; i < lineSegment.length; i++) {
+            String[] pixelLine = lineSegment[i].split("g");
+            for (int b = 0; b < pixelLine.length; b++) {
+                System.out.println(pixelLine[b]);
+            }
+        }
     }
 }
