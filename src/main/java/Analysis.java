@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +46,9 @@ public class Analysis {
     }
 
     public static void decompressData(String compressedData) {
+
+        String headerSegment = compressedData.split("gh")[0];
+        String[] headerSegmentPixels = headerSegment.split("g");
 
     }
 }
