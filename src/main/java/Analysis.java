@@ -18,7 +18,7 @@ public class Analysis {
                 String deviation = pixels[width][height].substring(1, 2) + pixels[width][height].substring(3, 4) + pixels[width][height].substring(5, 6);
                 if (headerSegment.size() > 0) {
                     for (int similarity = 0; similarity < headerSegment.size(); similarity++) {
-                        if (headerSegment.get(similarity).equals(segment)) {
+                        if (headerSegment.get(similarity).equals(segment + "g")) {
                             equal = true;
                         }
                     }
@@ -26,17 +26,17 @@ public class Analysis {
 
                 if (!equal) {
                     counter++;
-                    headerSegment.add(segment);
+                    headerSegment.add(segment + "g");
                 } else {
                     equal = false;
                 }
                 String split;
-                    if (width == 0) {
+                    if (height == 0) {
                         split = "h";
                     } else {
                         split = "";
                     }
-                compressedPixel.add(split + counter + "g" + deviation);
+                compressedPixel.add(split + counter + "g" + deviation + "gg");
             }
         }
         analysedPixels.add(headerSegment);
@@ -45,18 +45,27 @@ public class Analysis {
         return analysedPixels;
     }
 
-    public static void decompressData(String compressedData) {
+    public static String[][] decompressData(String compressedData) {
 
-        String headerSegment = compressedData.split("gh")[0];
+        String headerSegment = compressedData.split("ggh")[0];
         String[] headerSegmentPixels = headerSegment.split("g");
 
         String[] lineSegment = compressedData.split("gh")[1].split("h");
+        int rows = lineSegment.length;
+        int columns = lineSegment[0].split("gg").length;
 
-        for (int i = 0; i < lineSegment.length; i++) {
-            String[] pixelLine = lineSegment[i].split("g");
-            for (int b = 0; b < pixelLine.length; b++) {
-                System.out.println(pixelLine[b]);
+        String[][] pixels = new String[rows][columns];
+
+        for (int i = 0; i < rows; i++) {
+            String[] pixelLine = lineSegment[0].split("gg");
+            for (int b = 1; b < columns; b++) {
+                int headerNum = Integer.parseInt(pixelLine[b].split("g")[0]);
+                String decompressedPixel = headerSegmentPixels[headerNum] + pixelLine[b].split("g")[1];
+                pixels[i][b] = decompressedPixel;
             }
         }
+
+
+        return pixels;
     }
 }
